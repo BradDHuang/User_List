@@ -8,7 +8,8 @@ class CreateNewUser extends Component {
             first_name: "",
             last_name: "",
             sex: "",
-            age: "",
+            // age: "",
+            age: 0,
             password: "",
             confirmPW: "",
         };
