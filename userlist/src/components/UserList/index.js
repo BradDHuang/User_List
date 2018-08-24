@@ -1,6 +1,6 @@
 
 import React, {Component} from "react";
-
+import axios from "axios";
 import ListRow from "../ListRow";
 
 class UserList extends Component {
@@ -10,23 +10,15 @@ class UserList extends Component {
     }
     componentDidMount() {
         console.log("componentDidMount() is called.");
-        let sampleData = {
-            edit: "Edit",
-            delete: "Delete",
-            first_name: "Ben",
-            last_name: "Pitt",
-            sex: "Male",
-            age: "24",
-        };
-        let sampleData2 = {
-            edit: "Edit",
-            delete: "Delete",
-            first_name: "Chris",
-            last_name: "Freeman",
-            sex: "Male",
-            age: "43",
-        };
-        this.setState({ data: [ ...this.state.data, sampleData, sampleData2 ] });
+        axios({method: "get", url: "https://user-list-happitt.c9users.io:8081/api/users"})
+            .then(res => {
+                console.log(res.data);
+                // console.log(typeof(res.data));
+                this.setState({ data: res.data });
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
     onCreateClick = () => {
         this.props.history.push("/new");
