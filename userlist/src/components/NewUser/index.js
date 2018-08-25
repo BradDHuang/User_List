@@ -1,7 +1,7 @@
 
 import React, {Component} from "react";
-import * as actions from "../../actions";
-import {connect} from "react-redux";
+// import * as actions from "../../actions";
+// import {connect} from "react-redux";
 
 class CreateNewUser extends Component {
     constructor(props) {
@@ -10,8 +10,8 @@ class CreateNewUser extends Component {
             first_name: "",
             last_name: "",
             sex: "",
-            // age: "",
-            age: 0,
+            age: "",
+            // age: 0,
             password: "",
             confirmPW: "",
         };
@@ -50,8 +50,18 @@ class CreateNewUser extends Component {
           confirmPW: this.state.confirmPW,
         };
         console.log(newUser);
-        console.log(this.props.users); // Notice: async to be handled.
-        this.props.dispatch(actions.addUser(newUser));
+        // console.log(this.props.users); // Notice: async to be handled.
+        // this.props.dispatch(actions.addUser(newUser));
+        this.props.addUser(newUser);
+        this.setState({
+            first_name: "",
+            last_name: "",
+            sex: "",
+            age: "",
+            // age: 0,
+            password: "",
+            confirmPW: "",
+        });
     }
     render() {
         return (
@@ -121,14 +131,14 @@ class CreateNewUser extends Component {
         );
     }
 }
-
+/*
 const mapStateToProps = (state) => {
     return {
         users: state.users,
     };
 };
-
-export default connect(mapStateToProps)(CreateNewUser);
+*/
+export default CreateNewUser;
 
 
 

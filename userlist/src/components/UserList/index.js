@@ -43,6 +43,9 @@ class UserList extends Component {
                             {this.state.data.map((user, index) => {
                                 return <ListRow key={index} {...user} />;
                             })}
+                            {this.props.users.map((user) => {
+                                return <ListRow key={user.id} {...user} />;
+                            })}
                         </tbody>
                     </table>
                 </div>

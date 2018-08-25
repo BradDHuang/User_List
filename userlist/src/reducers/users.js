@@ -11,7 +11,7 @@ const users = (state = [], action) => {
                   sex: action.sex,
                   age: action.age,
                   password: action.password,
-                  confirmPW: action.confirmPW,
+                //   confirmPW: action.confirmPW,
                 },
             ];
         default:
