@@ -1,5 +1,7 @@
 
 import React, {Component} from "react";
+import * as actions from "../../actions";
+import {connect} from "react-redux";
 
 class CreateNewUser extends Component {
     constructor(props) {
@@ -15,7 +17,7 @@ class CreateNewUser extends Component {
         };
     }
     onAddClick = () => {
-        this.props.history.push("/");
+        // this.props.history.push("/");
     }
     handleFirstName = (e) => {
         // console.log(e.target);
@@ -37,7 +39,19 @@ class CreateNewUser extends Component {
         this.setState({ confirmPW: e.target.value });
     }
     handleSubmit = (e) => {
+        console.log("form onSubmit.");
         e.preventDefault();
+        let newUser = {
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
+          sex: this.state.sex,
+          age: this.state.age,
+          password: this.state.password,
+          confirmPW: this.state.confirmPW,
+        };
+        console.log(newUser);
+        console.log(this.props.users); // Notice: async to be handled.
+        this.props.dispatch(actions.addUser(newUser));
     }
     render() {
         return (
@@ -97,17 +111,24 @@ class CreateNewUser extends Component {
                         />
                     </label>
                     </div>
+                    <button type="submit" onClick={this.onAddClick}>+ Add User</button>
                 </form>
                 <br />
                 <hr />
                 <br />
-                <button onClick={this.onAddClick}>+ Add User</button>
+
             </div>
         );
     }
 }
 
-export default CreateNewUser;
+const mapStateToProps = (state) => {
+    return {
+        users: state.users,
+    };
+};
+
+export default connect(mapStateToProps)(CreateNewUser);
 
 
 
