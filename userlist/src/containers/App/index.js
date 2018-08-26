@@ -31,7 +31,6 @@ class App extends Component {
           <Route exact={true} path="/" 
             render={() => (<WithRouterUserList 
               users={this.props.users}
-              addUser={this.props.addUser}
             />)}
           />
           <Route path="/new"
