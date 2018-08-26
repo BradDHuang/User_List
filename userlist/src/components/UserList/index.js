@@ -10,8 +10,8 @@ class UserList extends Component {
     }
     componentDidMount() {
         // console.log("componentDidMount() is called.");
-        // axios({method: "get", url: "https://user-list-happitt.c9users.io:8081/api/users"})
-        axios({method: "get", url: "https://user-list-happitt.c9users.io/api/users"})
+        axios({method: "get", url: "https://user-list-happitt.c9users.io:8081/api/users"})
+        // axios({method: "get", url: "https://user-list-happitt.c9users.io/api/users"})
             .then(res => {
                 // console.log(res.data);
                 // console.log(typeof(res.data));
