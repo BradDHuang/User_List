@@ -57,9 +57,17 @@ class CreateNewUser extends Component {
         // this.props.dispatch(actions.addUser(newUser));
         this.props.addUser(newUser);
         let first_name = this.state.first_name;
-        console.log(first_name);
+        // console.log(first_name);
+        let last_name = this.state.last_name;
+        let sex = this.state.sex;
+        let age = this.state.age;
+        let password = this.state.password;
         const params = {
             first_name: `${first_name}`,
+            last_name: `${last_name}`,
+            sex: `${sex}`,
+            age: `${age}`,
+            password: `${password}`,
         };
         axios({ method: "post", 
                 url: "https://user-list-happitt.c9users.io:8081/api/users",
@@ -68,15 +76,11 @@ class CreateNewUser extends Component {
                 // data: {
                     // first_name: `${first_name}`
                     // fn: "Ben",
-                    // last_name: this.state.last_name,
-                    // sex: this.state.sex,
-                    // age: this.state.age,
-                    // password: this.state.password,
                     // confirmPW: this.state.confirmPW,
                 // },
         })
             .then(res => {
-                console.log(res);
+                console.log(res.data);
                 // console.log(typeof(res.data));
             })
             .catch(err => {

@@ -1,26 +1,14 @@
 
 import React, {Component} from "react";
-import axios from "axios";
+// import axios from "axios";
 import ListRow from "../ListRow";
 
 class UserList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { data: [] };
-    }
-    componentDidMount() {
-        // console.log("componentDidMount() is called.");
-        axios({method: "get", url: "https://user-list-happitt.c9users.io:8081/api/users"})
-        // axios({method: "get", url: "https://user-list-happitt.c9users.io/api/users"})
-            .then(res => {
-                // console.log(res.data);
-                // console.log(typeof(res.data));
-                this.setState({ data: res.data });
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+    // constructor(props) {
+        // super(props);
+        // this.state = { data: [] };
+    // }
+
     onCreateClick = () => {
         this.props.history.push("/new");
     }

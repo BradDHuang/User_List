@@ -5,11 +5,24 @@ import {connect} from "react-redux";
 import UserList from "../../components/UserList";
 import CreateNewUser from "../../components/NewUser";
 import * as actions from "../../actions";
+import axios from "axios";
 
 const WithRouterUserList = withRouter(UserList);
 const WithRouterCreateNewUser = withRouter(CreateNewUser);
 
 class App extends Component {
+    componentDidMount() {
+        axios({method: "get", url: "https://user-list-happitt.c9users.io:8081/api/users"})
+            .then(res => {
+                console.log(res.data);
+                res.data.forEach(user => {
+                    this.props.addUser(user);
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
   render() {
     // console.log(this.props.users);
     return (
@@ -18,6 +31,7 @@ class App extends Component {
           <Route exact={true} path="/" 
             render={() => (<WithRouterUserList 
               users={this.props.users}
+              addUser={this.props.addUser}
             />)}
           />
           <Route path="/new"
