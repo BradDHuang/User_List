@@ -9,10 +9,11 @@ class UserList extends Component {
         this.state = { data: [] };
     }
     componentDidMount() {
-        console.log("componentDidMount() is called.");
-        axios({method: "get", url: "https://user-list-happitt.c9users.io:8081/api/users"})
+        // console.log("componentDidMount() is called.");
+        // axios({method: "get", url: "https://user-list-happitt.c9users.io:8081/api/users"})
+        axios({method: "get", url: "https://user-list-happitt.c9users.io/api/users"})
             .then(res => {
-                console.log(res.data);
+                // console.log(res.data);
                 // console.log(typeof(res.data));
                 this.setState({ data: res.data });
             })

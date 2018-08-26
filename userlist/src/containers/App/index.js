@@ -11,7 +11,7 @@ const WithRouterCreateNewUser = withRouter(CreateNewUser);
 
 class App extends Component {
   render() {
-    console.log(this.props.users);
+    // console.log(this.props.users);
     return (
       <BrowserRouter>
         <Switch>

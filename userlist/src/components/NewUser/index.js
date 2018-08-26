@@ -2,6 +2,9 @@
 import React, {Component} from "react";
 // import * as actions from "../../actions";
 // import {connect} from "react-redux";
+import axios from "axios";
+import qs from "qs";
+// A querystring parsing and stringifying library with some added security.
 
 class CreateNewUser extends Component {
     constructor(props) {
@@ -39,7 +42,7 @@ class CreateNewUser extends Component {
         this.setState({ confirmPW: e.target.value });
     }
     handleSubmit = (e) => {
-        console.log("form onSubmit.");
+        // console.log("form onSubmit.");
         e.preventDefault();
         let newUser = {
           first_name: this.state.first_name,
@@ -53,6 +56,32 @@ class CreateNewUser extends Component {
         // console.log(this.props.users); // Notice: async to be handled.
         // this.props.dispatch(actions.addUser(newUser));
         this.props.addUser(newUser);
+        let first_name = this.state.first_name;
+        console.log(first_name);
+        const params = {
+            first_name: `${first_name}`,
+        };
+        axios({ method: "post", 
+                // url: "https://user-list-happitt.c9users.io:8081/api/users",
+                url: "https://user-list-happitt.c9users.io/api/users",
+                data: qs.stringify(params),
+                // data: {
+                    // first_name: `${first_name}`
+                    // fn: "Ben",
+                    // last_name: this.state.last_name,
+                    // sex: this.state.sex,
+                    // age: this.state.age,
+                    // password: this.state.password,
+                    // confirmPW: this.state.confirmPW,
+                // },
+        })
+            .then(res => {
+                console.log(res);
+                // console.log(typeof(res.data));
+            })
+            .catch(err => {
+                console.log(err);
+            });
         this.setState({
             first_name: "",
             last_name: "",

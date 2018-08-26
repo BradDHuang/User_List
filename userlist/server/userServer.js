@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 var cors = require("cors");
 
-const port = 8081;
+const port = 8080;
 // https://user-list-happitt.c9users.io:8081/api/users
 
 const User = require("./user");
@@ -33,7 +33,7 @@ app.get("/api/users", (req, res) => {
 
 app.post("/api/users", (req, res) => {
     let newUser = new User();
-    // console.log(req.body);
+    console.log(req.body);
     newUser.first_name = req.body.first_name;
     newUser.last_name = req.body.last_name;
     newUser.sex = req.body.sex;
@@ -46,10 +46,7 @@ app.post("/api/users", (req, res) => {
             res.end(err.toString());
         } else {
             console.log("Created a user.");
-            let result = "";
-            result += newUser.toString() + "\n";
-            res.writeHead(200, {"Content-Type": "text/plain"});
-            res.end(result);
+            res.status(200).json(newUser);
         }
     });
 });
