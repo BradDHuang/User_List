@@ -40,9 +40,7 @@ class UserList extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.data.map((user, index) => {
-                                return <ListRow key={index} {...user} />;
-                            })}
+                            
                             {this.props.users.map((user) => {
                                 return <ListRow key={user.id} {...user} />;
                             })}
@@ -56,7 +54,11 @@ class UserList extends Component {
         );
     }
 }
-
+/*
+{this.state.data.map((user, index) => {
+                                return <ListRow key={index} {...user} />;
+                            })}
+*/
 export default UserList;
 
 

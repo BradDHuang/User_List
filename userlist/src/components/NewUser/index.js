@@ -61,7 +61,8 @@ class CreateNewUser extends Component {
             // age: 0,
             password: "",
             confirmPW: "",
-        });
+        });        
+        this.props.history.push("/");
     }
     render() {
         return (
@@ -121,12 +122,12 @@ class CreateNewUser extends Component {
                         />
                     </label>
                     </div>
+                    <br />
+                    <hr />
+                    <br />
                     <button type="submit" onClick={this.onAddClick}>+ Add User</button>
                 </form>
-                <br />
-                <hr />
-                <br />
-
+                
             </div>
         );
     }
