@@ -2,13 +2,16 @@
 import React, {Component} from "react";
 // import axios from "axios";
 import ListRow from "../ListRow";
+import {withRouter} from "react-router-dom";
+
+const WithRouterListRow = withRouter(ListRow);
 
 class UserList extends Component {
     // constructor(props) {
         // super(props);
         // this.state = { data: [] };
     // }
-
+    
     onCreateClick = () => {
         this.props.history.push("/new");
     }
@@ -30,8 +33,8 @@ class UserList extends Component {
                         </thead>
                         <tbody>
                             
-                            {this.props.users.map((user) => {
-                                return <ListRow key={user.id} {...user} />;
+                            {this.props.users.map((user, index) => {
+                                return <WithRouterListRow key={index} data={user} />;
                             })}
                         </tbody>
                     </table>

@@ -1,29 +1,36 @@
 
 import React, {Component} from "react";
-// import * as actions from "../../actions";
-// import {connect} from "react-redux";
 import axios from "axios";
 import qs from "qs";
-// A querystring parsing and stringifying library with some added security.
 
-class CreateNewUser extends Component {
+class EditUser extends Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             first_name: "",
             last_name: "",
             sex: "",
             age: "",
-            // age: 0,
             password: "",
             confirmPW: "",
         };
     }
-    onAddClick = () => {
-        // this.props.history.push("/");
+    componentDidMount() {
+        // console.log(typeof(this.props.match.params.userId));
+        // console.log(this.props.users);
+        this.props.users.forEach(user => {
+            if (user.id === this.props.match.params.userId) {
+                // console.log({...user});
+                this.setState({
+                    first_name: user.first_name,
+                    last_name: user.last_name,
+                    sex: user.sex,
+                    age: user.age,
+                });
+            }
+        });
     }
     handleFirstName = (e) => {
-        // console.log(e.target);
         this.setState({ first_name: e.target.value });
     }
     handleLastName = (e) => {
@@ -42,22 +49,18 @@ class CreateNewUser extends Component {
         this.setState({ confirmPW: e.target.value });
     }
     handleSubmit = (e) => {
-        // console.log("form onSubmit.");
         e.preventDefault();
         let newUser = {
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          sex: this.state.sex,
-          age: this.state.age,
-          password: this.state.password,
-          confirmPW: this.state.confirmPW,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            sex: this.state.sex,
+            age: this.state.age,
+            password: this.state.password,
+            confirmPW: this.state.confirmPW,
         };
         // console.log(newUser);
-        // console.log(this.props.users); // Notice: async to be handled.
-        // this.props.dispatch(actions.addUser(newUser));
-        this.props.addUser(newUser);
+        this.props.editUser(this.props.match.params.userId, newUser);
         let first_name = this.state.first_name;
-        // console.log(first_name);
         let last_name = this.state.last_name;
         let sex = this.state.sex;
         let age = this.state.age;
@@ -69,19 +72,12 @@ class CreateNewUser extends Component {
             age: `${age}`,
             password: `${password}`,
         };
-        axios({ method: "post", 
-                url: "https://user-list-happitt.c9users.io:8081/api/users",
-                // url: "https://user-list-happitt.c9users.io/api/users",
+        axios({ method: "put", 
+                url: "https://user-list-happitt.c9users.io:8081/api/users/" + this.props.match.params.userId,
                 data: qs.stringify(params),
-                // data: {
-                    // first_name: `${first_name}`
-                    // fn: "Ben",
-                    // confirmPW: this.state.confirmPW,
-                // },
         })
             .then(res => {
                 console.log(res.data);
-                // console.log(typeof(res.data));
             })
             .catch(err => {
                 console.log(err);
@@ -91,7 +87,6 @@ class CreateNewUser extends Component {
             last_name: "",
             sex: "",
             age: "",
-            // age: 0,
             password: "",
             confirmPW: "",
         });        
@@ -100,7 +95,7 @@ class CreateNewUser extends Component {
     render() {
         return (
             <div>
-                <h3>Create New User:</h3>
+                <h3>Edit User:</h3>
                 <form onSubmit={this.handleSubmit}>
                     <div style={{ lineHeight: "1.2" }}>
                     <label>First-Name: 
@@ -158,21 +153,23 @@ class CreateNewUser extends Component {
                     <br />
                     <hr />
                     <br />
-                    <button type="submit" onClick={this.onAddClick}>+ Add User</button>
+                    <button type="submit" onClick={this.onAddClick}>Save Changes</button>
                 </form>
-                
             </div>
         );
     }
 }
-/*
-const mapStateToProps = (state) => {
-    return {
-        users: state.users,
-    };
-};
-*/
-export default CreateNewUser;
+
+export default EditUser;
+
+
+
+
+
+
+
+
+
 
 
 

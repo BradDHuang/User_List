@@ -1,5 +1,6 @@
 
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 
 class ListRow extends Component {
     constructor(props) {
@@ -9,12 +10,18 @@ class ListRow extends Component {
     render() {
         return (
             <tr>
-                <td>{this.props.edit}</td>
-                <td>{this.props.delete}</td>
-                <td>{this.props.first_name}</td>
-                <td>{this.props.last_name}</td>
-                <td>{this.props.sex}</td>
-                <td>{this.props.age}</td>
+                <td>
+                    <Link to={{pathname: `/${this.props.data.id}`}}>
+                        <button type="button">
+                        Edit
+                        </button>
+                    </Link>
+                </td>
+                <td>{this.props.data.delete}</td>
+                <td>{this.props.data.first_name}</td>
+                <td>{this.props.data.last_name}</td>
+                <td>{this.props.data.sex}</td>
+                <td>{this.props.data.age}</td>
             </tr>
         );
     }

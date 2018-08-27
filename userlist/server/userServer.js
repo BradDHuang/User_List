@@ -51,6 +51,36 @@ app.post("/api/users", (req, res) => {
     });
 });
 
+app.put("/api/users/:userId", (req, res) => {
+    let id = req.params.userId;
+    User.findById(id, (err, user) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(req.body);
+            user.first_name = req.body.first_name;
+            user.last_name = req.body.last_name;
+            user.sex = req.body.sex;
+            user.age = req.body.age;
+            user.password = req.body.password;
+            user.save((err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Edited a user.");
+                    User.findById(id, (err, user) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            res.status(200).json(user);
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
 app.listen(port, () => {
     console.log(`The user server has started on port ${port}...`);
 });

@@ -14,6 +14,19 @@ const users = (state = [], action) => {
                 //   confirmPW: action.confirmPW,
                 },
             ];
+            
+        case 'EDIT_USER':
+            return state.map(user => {
+                if (user.id !== action.id) {
+                    return user;
+                } else {
+                    return {
+                        ...user,
+                        ...action.user
+                    };
+                }
+            });
+            
         default:
             return state;
     }
