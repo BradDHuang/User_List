@@ -13,5 +13,10 @@ export const editUser = (id, user) => ({
     user,
 });
 
+export const deleteUser = (id) => ({
+    type: "DELETE_USER",
+    id,
+});
+
 
 

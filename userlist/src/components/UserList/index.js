@@ -1,6 +1,6 @@
 
 import React, {Component} from "react";
-// import axios from "axios";
+import axios from "axios";
 import ListRow from "../ListRow";
 import {withRouter} from "react-router-dom";
 
@@ -14,6 +14,18 @@ class UserList extends Component {
     
     onCreateClick = () => {
         this.props.history.push("/new");
+    }
+    deleteUser = (id) => {
+        this.props.deleteUser(id);
+        console.log(id);
+        axios({ method: "delete", 
+                url: `https://user-list-happitt.c9users.io:8081/api/users/${id}`,})
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
     render() {
         return (
@@ -34,7 +46,9 @@ class UserList extends Component {
                         <tbody>
                             
                             {this.props.users.map((user, index) => {
-                                return <WithRouterListRow key={index} data={user} />;
+                                return <WithRouterListRow key={index} data={user} 
+                                    deleteUser={() => this.deleteUser(user.id)}
+                                />;
                             })}
                         </tbody>
                     </table>

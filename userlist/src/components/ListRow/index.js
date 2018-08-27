@@ -17,7 +17,13 @@ class ListRow extends Component {
                         </button>
                     </Link>
                 </td>
-                <td>{this.props.data.delete}</td>
+                <td>
+                    <button type="button" 
+                        onClick={() => this.props.deleteUser(this.props.data.id)}
+                    >
+                    Delete
+                    </button>
+                </td>
                 <td>{this.props.data.first_name}</td>
                 <td>{this.props.data.last_name}</td>
                 <td>{this.props.data.sex}</td>

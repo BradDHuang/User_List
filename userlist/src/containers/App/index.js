@@ -32,8 +32,10 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact={true} path="/" 
-            render={() => (<WithRouterUserList 
+            render={({match}) => (<WithRouterUserList 
               users={this.props.users}
+              deleteUser={this.props.deleteUser}
+              match={match}
             />)}
           />
           <Route path="/new"
@@ -67,6 +69,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     editUser: (id, user) => {
       dispatch(actions.editUser(id, user));
+    },
+    deleteUser: (id) => {
+      dispatch(actions.deleteUser(id));
     }
   };
 };

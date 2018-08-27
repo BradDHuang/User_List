@@ -27,6 +27,9 @@ const users = (state = [], action) => {
                 }
             });
             
+        case 'DELETE_USER':
+            return state.filter(user => user.id !== action.id);
+            
         default:
             return state;
     }
