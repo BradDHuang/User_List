@@ -7,10 +7,10 @@ import {withRouter} from "react-router-dom";
 const WithRouterListRow = withRouter(ListRow);
 
 class UserList extends Component {
-    // constructor(props) {
-        // super(props);
-        // this.state = { data: [] };
-    // }
+    constructor(props) {
+        super(props);
+        this.state = { search: "" };
+    }
     
     onCreateClick = () => {
         this.props.history.push("/new");
@@ -27,10 +27,29 @@ class UserList extends Component {
                 console.log(err);
             });
     }
+    handleSearch = (e) => {
+        this.setState({ search: e.target.value });
+    }
+    matchSearch = (user) => {
+        return (
+            user.first_name.search(new RegExp(this.state.search)) !== -1 ||
+            user.last_name.search(new RegExp(this.state.search)) !== -1 ||
+            user.sex.search(new RegExp(this.state.search)) !== -1 ||
+            user.age.search(new RegExp(this.state.search)) !== -1
+        );
+    }
     render() {
         return (
             <div>
                 <h3>Users:</h3>
+                <hr />
+                <div>
+                Search:
+                <input type="text" value={this.state.search} 
+                    onChange={this.handleSearch}
+                />
+                </div>
+                <hr />
                 <div>
                     <table>
                         <thead>
@@ -46,9 +65,16 @@ class UserList extends Component {
                         <tbody>
                             
                             {this.props.users.map((user, index) => {
-                                return <WithRouterListRow key={index} data={user} 
-                                    deleteUser={() => this.deleteUser(user.id)}
-                                />;
+                                if (this.state.search === "") {
+                                    return <WithRouterListRow key={index} data={user} 
+                                        deleteUser={() => this.deleteUser(user.id)}
+                                    />;
+                                } else {
+                                    return (this.matchSearch(user)) ? 
+                                    <WithRouterListRow key={index} data={user} 
+                                        deleteUser={() => this.deleteUser(user.id)}
+                                    /> : null;
+                                }
                             })}
                         </tbody>
                     </table>

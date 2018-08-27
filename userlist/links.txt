@@ -5,6 +5,10 @@ https://www.npmjs.com/package/qs
 https://github.com/axios/axios/issues/1195
 // Unable to POST data in axios #1195
 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search
+// str.search(regexp)
+
+
 
 
 
