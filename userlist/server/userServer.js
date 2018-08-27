@@ -81,6 +81,24 @@ app.put("/api/users/:userId", (req, res) => {
     });
 });
 
+app.delete("/api/users/:userId", (req, res) => {
+    User.find((err, users) => {
+        if (err) {
+            console.log(err);
+        } else {
+            let id = req.params.userId;
+            User.remove({_id: id}, (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Deleted a user.");
+                    res.send("Deleted a user.");
+                }
+            });
+        }
+    });
+});
+
 app.listen(port, () => {
     console.log(`The user server has started on port ${port}...`);
 });
