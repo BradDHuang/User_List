@@ -24,6 +24,7 @@ class App extends Component {
             })
             .catch(err => {
                 console.log(err);
+                alert("503 (Server Service Unavailable)");
             });
     }
   render() {

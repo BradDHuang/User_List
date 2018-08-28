@@ -55,7 +55,9 @@ app.put("/api/users/:userId", (req, res) => {
     let id = req.params.userId;
     User.findById(id, (err, user) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
+            res.writeHead(500, {"Content-Type": "text/plain"});
+            res.end(err.toString());
         } else {
             console.log(req.body);
             user.first_name = req.body.first_name;
@@ -65,12 +67,16 @@ app.put("/api/users/:userId", (req, res) => {
             user.password = req.body.password;
             user.save((err) => {
                 if (err) {
-                    console.log(err);
+                    // console.log(err);
+                    res.writeHead(500, {"Content-Type": "text/plain"});
+                    res.end(err.toString());
                 } else {
                     console.log("Edited a user.");
                     User.findById(id, (err, user) => {
                         if (err) {
-                            console.log(err);
+                            // console.log(err);
+                            res.writeHead(500, {"Content-Type": "text/plain"});
+                            res.end(err.toString());
                         } else {
                             res.status(200).json(user);
                         }
@@ -84,12 +90,16 @@ app.put("/api/users/:userId", (req, res) => {
 app.delete("/api/users/:userId", (req, res) => {
     User.find((err, users) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
+            res.writeHead(500, {"Content-Type": "text/plain"});
+            res.end(err.toString());
         } else {
             let id = req.params.userId;
             User.remove({_id: id}, (err) => {
                 if (err) {
-                    console.log(err);
+                    // console.log(err);
+                    res.writeHead(500, {"Content-Type": "text/plain"});
+                    res.end(err.toString());
                 } else {
                     console.log("Deleted a user.");
                     res.send("Deleted a user from DB.");
