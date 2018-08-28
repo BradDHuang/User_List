@@ -9,7 +9,13 @@ const WithRouterListRow = withRouter(ListRow);
 class UserList extends Component {
     constructor(props) {
         super(props);
-        this.state = { search: "" };
+        this.state = { 
+            search: "",
+            descWithFN: false,
+            descWithLN: false,
+            descWithSex: false,
+            descWithAge: false,
+        };
     }
     
     onCreateClick = () => {
@@ -39,12 +45,43 @@ class UserList extends Component {
         );
     }
     sortWithFN = () => {
-        console.log("get all users for sorting");
-        this.props.users.sort((a, b) => a.first_name.localeCompare(b.first_name));
+        console.log("get all first_names for sorting");
+        if (!this.state.descWithFN) {
+            this.props.users.sort((a, b) => a.first_name.localeCompare(b.first_name));
+        } else {
+            this.props.users.sort((a, b) => b.first_name.localeCompare(a.first_name));
+        }
         console.log(this.props.users);
         let sortedUsers = this.props.users;
         // console.log(sortedUsers);
-        this.setState({ users: sortedUsers });
+        this.setState({ users: sortedUsers, descWithFN: !this.state.descWithFN });
+    }
+    sortWithLN = () => {
+        console.log("get all last_names for sorting");
+        if (!this.state.descWithLN) {
+            this.props.users.sort((a, b) => a.last_name.localeCompare(b.last_name));
+        } else {
+            this.props.users.sort((a, b) => b.last_name.localeCompare(a.last_name));
+        }
+        this.setState({ users: this.props.users, descWithLN: !this.state.descWithLN });
+    }
+    sortWithSex = () => {
+        console.log("get all sex for sorting");
+        if (!this.state.descWithSex) {
+            this.props.users.sort((a, b) => a.sex.localeCompare(b.sex));
+        } else {
+            this.props.users.sort((a, b) => b.sex.localeCompare(a.sex));
+        }
+        this.setState({ users: this.props.users, descWithSex: !this.state.descWithSex });
+    }
+    sortWithAge = () => {
+        console.log("get all ages for sorting");
+        if (!this.state.descWithAge) {
+            this.props.users.sort((a, b) => parseInt(a.age, 10) - parseInt(b.age, 10));
+        } else {
+            this.props.users.sort((a, b) => parseInt(b.age, 10) - parseInt(a.age, 10));
+        }
+        this.setState({ users: this.props.users, descWithAge: !this.state.descWithAge });
     }
     render() {
         return (
@@ -65,9 +102,9 @@ class UserList extends Component {
                                 <th>Edit</th>
                                 <th>Delete</th>
                                 <th onClick={this.sortWithFN}>First-Name</th>
-                                <th>Last-Name</th>
-                                <th>Sex</th>
-                                <th>Age</th>
+                                <th onClick={this.sortWithLN}>Last-Name</th>
+                                <th onClick={this.sortWithSex}>Sex</th>
+                                <th onClick={this.sortWithAge}>Age</th>
                             </tr>
                         </thead>
                         <tbody>
