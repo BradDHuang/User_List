@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import axios from "axios";
 import ListRow from "../ListRow";
 import {withRouter} from "react-router-dom";
+import Pagination from "../Pagination";
 
 const WithRouterListRow = withRouter(ListRow);
 
@@ -15,6 +16,8 @@ class UserList extends Component {
             descWithLN: false,
             descWithSex: false,
             descWithAge: false,
+            curPage: 1,
+            usersPerPage: 3,
         };
     }
     
@@ -83,6 +86,12 @@ class UserList extends Component {
         }
         this.setState({ users: this.props.users, descWithAge: !this.state.descWithAge });
     }
+    handleUsersPerPage = (e) => {
+        this.setState({ usersPerPage: e.target.value });
+    }
+    handlePageChange = (page) => {
+        this.setState({ curPage: page });
+    }
     render() {
         return (
             <div>
@@ -95,6 +104,14 @@ class UserList extends Component {
                 />
                 </div>
                 <hr />
+                <div>
+                Users / Page:
+                <select onChange={this.handleUsersPerPage}>
+                    <option>3</option>
+                    <option>5</option>
+                    <option>10</option>
+                </select>
+                </div>
                 <div>
                     <table>
                         <thead>
@@ -110,9 +127,14 @@ class UserList extends Component {
                         <tbody>
                             {this.props.users.map((user, index) => {
                                 if (this.state.search === "") {
-                                    return <WithRouterListRow key={index} data={user} 
-                                        deleteUser={() => this.deleteUser(user.id)}
-                                    />;
+                                    const {curPage, usersPerPage} = this.state;
+                                    if (index >= (curPage - 1) * usersPerPage && index < (curPage) * usersPerPage) {
+                                        return <WithRouterListRow key={index} data={user} 
+                                            deleteUser={() => this.deleteUser(user.id)}
+                                        />;
+                                    } else {
+                                        return null;
+                                    }
                                 } else {
                                     return (this.matchSearch(user)) ? 
                                     <WithRouterListRow key={index} data={user} 
@@ -122,6 +144,14 @@ class UserList extends Component {
                             })}
                         </tbody>
                     </table>
+                    <Pagination
+                        changePage={this.handlePageChange}
+                        data={{
+                            numOfUsers: this.props.users.length,
+                            curPage: this.state.curPage,
+                            usersPerPage: this.state.usersPerPage,
+                        }}
+                    />
                 </div>
                 <div>
                     <button onClick={this.onCreateClick}>Create New User</button>
