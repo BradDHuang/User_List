@@ -6,6 +6,15 @@ import axios from "axios";
 import qs from "qs";
 // A querystring parsing and stringifying library with some added security.
 
+const PWMatch = (props) => {
+    return (
+        (props.match === "") ?
+        null : (props.match === true) ?
+        (<i style={{ color: "green" }} className="fas fa-check"></i>) :
+        (<i style={{ color: "red" }} className="fas fa-times"></i>)
+    );
+};
+
 class CreateNewUser extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +26,7 @@ class CreateNewUser extends Component {
             // age: 0,
             password: "",
             confirmPW: "",
+            pwMatch: "",
         };
     }
     onAddClick = () => {
@@ -40,17 +50,25 @@ class CreateNewUser extends Component {
     }
     handleConfirmPW = (e) => {
         this.setState({ confirmPW: e.target.value });
+        // check if PWs match:
+        if (this.state.password !== e.target.value) {
+            this.setState({ pwMatch: false });
+        } else {
+            this.setState({ pwMatch: true });
+        }
     }
     handleSubmit = (e) => {
         // console.log("form onSubmit.");
         e.preventDefault();
+        // submit only when PWs match:
+        if (this.state.password === this.state.confirmPW) {
         let newUser = {
           first_name: this.state.first_name,
           last_name: this.state.last_name,
           sex: this.state.sex,
           age: this.state.age,
           password: this.state.password,
-          confirmPW: this.state.confirmPW,
+        //   confirmPW: this.state.confirmPW,
         };
         // console.log(newUser);
         // console.log(this.props.users); // Notice: async to be handled.
@@ -94,8 +112,10 @@ class CreateNewUser extends Component {
             // age: 0,
             password: "",
             confirmPW: "",
+            pwMatch: "",
         });        
         this.props.history.push("/");
+        }
     }
     render() {
         return (
@@ -122,10 +142,14 @@ class CreateNewUser extends Component {
                     <br />                
                     <div style={{ lineHeight: "1.2" }}>
                     <label>Sex: 
-                        <input type="text" value={this.state.sex} 
+                        <select
+                            value={this.state.sex} 
                             onChange={this.handleSex}
-                            placeholder={"Sex"}
-                        />
+                        >
+                            <option value=""></option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
                     </label>
                     </div>
                     <br />                
@@ -145,6 +169,7 @@ class CreateNewUser extends Component {
                             placeholder={"Password"}
                         />
                     </label>
+                    <PWMatch match={this.state.pwMatch} />
                     </div>
                     <br />                
                     <div style={{ lineHeight: "1.2" }}>
@@ -154,6 +179,7 @@ class CreateNewUser extends Component {
                             placeholder={"Confirm Password"}
                         />
                     </label>
+                    <PWMatch match={this.state.pwMatch} />
                     </div>
                     <br />
                     <hr />
