@@ -114,74 +114,64 @@ class EditUser extends Component {
     }
     render() {
         return (
-            <div>
+            <form onSubmit={this.handleSubmit}>
                 <h3>Edit User:</h3>
-                <form onSubmit={this.handleSubmit}>
-                    <div style={{ lineHeight: "1.2" }}>
-                    <label>First-Name: 
+                <div className="form-group">
+                    <label htmlFor="fn">First Name</label>
                         <input type="text" value={this.state.first_name} 
                             onChange={this.handleFirstName}
-                            placeholder={"First Name"}
+                            placeholder="First Name"
+                            className="form-control" id="fn"
                         />
-                    </label>
-                    </div>
-                    <br />
-                    <div style={{ lineHeight: "1.2" }}>
-                    <label>Last-Name: 
+                </div>
+                <div className="form-group">
+                    <label htmlFor="ln">Last Name</label>
                         <input type="text" value={this.state.last_name} 
                             onChange={this.handleLastName}
                             placeholder={"Last Name"}
+                            className="form-control" id="ln"
                         />
-                    </label>
-                    </div>
-                    <br />                
-                    <div style={{ lineHeight: "1.2" }}>
-                    <label>Sex: 
+                </div>
+                <div className="form-group">
+                    <label htmlFor="sex">Sex</label>
                         <select
                             value={this.state.sex} 
                             onChange={this.handleSex}
+                            className="form-control" id="sex"
                         >
                             <option value=""></option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
-                    </label>
-                    </div>
-                    <br />                
-                    <div style={{ lineHeight: "1.2" }}>
-                    <label>Age: 
+                </div>
+                <div className="form-group">
+                    <label htmlFor="age">Age</label>
                         <input type="text" value={this.state.age} 
                             onChange={this.handleAge}
                             placeholder={"Age"}
+                            className="form-control" id="age"
                         />
-                    </label>
-                    </div>
-                    <br />                
-                    <div style={{ lineHeight: "1.2" }}>
-                    <label>Password: 
+                </div>
+                <div className="form-group">
+                    <label htmlFor="pw">Password</label>
                         <input type="text" value={this.state.password} 
                             onChange={this.handlePassword}
                             placeholder={"Password"}
+                            className="form-control" id="pw"
                         />
-                    </label>
                     <PWMatch match={this.state.pwMatch} />
-                    </div>
-                    <br />                
-                    <div style={{ lineHeight: "1.2" }}>
-                    <label>Confirm Password: 
+                </div>
+                <div className="form-group">
+                    <label htmlFor="cp">Confirm Password</label>
                         <input type="text" value={this.state.confirmPW} 
                             onChange={this.handleConfirmPW}
                             placeholder={"Confirm Password"}
+                            className="form-control" id="cp"
                         />
-                    </label>
                     <PWMatch match={this.state.pwMatch} />
-                    </div>
-                    <br />
-                    <hr />
-                    <br />
-                    <button type="submit" onClick={this.onAddClick}>Save Changes</button>
-                </form>
-            </div>
+                </div>
+                <button type="submit" className="btn btn-primary" onClick={this.onAddClick}><i className="fas fa-download"></i>{" Save Changes"}</button>
+            </form>
         );
     }
 }

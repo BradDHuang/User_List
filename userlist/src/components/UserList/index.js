@@ -98,30 +98,31 @@ class UserList extends Component {
                 <h3>Users:</h3>
                 <hr />
                 <div>
-                Search:
-                <input type="text" value={this.state.search} 
-                    onChange={this.handleSearch}
-                />
+                    <label htmlFor="search">Search:</label>
+                    <input type="text" value={this.state.search} 
+                        onChange={this.handleSearch}
+                        id="search"
+                    />
                 </div>
                 <hr />
                 <div>
-                Users / Page:
-                <select onChange={this.handleUsersPerPage}>
-                    <option>3</option>
-                    <option>5</option>
-                    <option>10</option>
-                </select>
+                    <label htmlFor="upp">Users / Page:</label>
+                    <select onChange={this.handleUsersPerPage} id="upp">
+                        <option>3</option>
+                        <option>5</option>
+                        <option>10</option>
+                    </select>
                 </div>
                 <div>
-                    <table>
+                    <table className="table">
                         <thead>
                             <tr>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                                <th onClick={this.sortWithFN}>First-Name</th>
-                                <th onClick={this.sortWithLN}>Last-Name</th>
-                                <th onClick={this.sortWithSex}>Sex</th>
-                                <th onClick={this.sortWithAge}>Age</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                                <th scope="col" onClick={this.sortWithFN}>First Name</th>
+                                <th scope="col" onClick={this.sortWithLN}>Last Name</th>
+                                <th scope="col" onClick={this.sortWithSex}>Sex</th>
+                                <th scope="col" onClick={this.sortWithAge}>Age</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -154,7 +155,7 @@ class UserList extends Component {
                     />
                 </div>
                 <div>
-                    <button onClick={this.onCreateClick}>Create New User</button>
+                    <button className="btn btn-primary" onClick={this.onCreateClick}><i className="fas fa-user-plus"></i>{" Create New User"}</button>
                 </div>
             </div>
         );
