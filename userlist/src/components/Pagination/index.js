@@ -4,19 +4,19 @@ import React, {Component} from "react";
 const GoPrev = (props) => {
     return props.page === 1 ? 
         (<li className="page-item disabled">
-            <a className="page-link"><i className="fas fa-chevron-left"></i></a>
+            <a className="page-link"><i className="fas fa-chevron-left"></i>{" Prev"}</a>
         </li>) : 
         (<li className="page-item" onClick={() => props.changePage(props.page - 1)}>
-            <a className="page-link"><i className="fas fa-chevron-left"></i></a>
+            <a className="page-link"><i className="fas fa-chevron-left"></i>{" Prev"}</a>
         </li>);
 };
 const GoNext = (props) => {
     return props.page === props.lastPageNum ? 
         (<li className="page-item disabled">
-            <a className="page-link"><i className="fas fa-chevron-right"></i></a>
+            <a className="page-link">{"Next "}<i className="fas fa-chevron-right"></i></a>
         </li>) : 
         (<li className="page-item" onClick={() => props.changePage(props.page + 1)}>
-            <a className="page-link"><i className="fas fa-chevron-right"></i></a>
+            <a className="page-link">{"Next "}<i className="fas fa-chevron-right"></i></a>
         </li>);
 };
 const CurPage = (props) => {

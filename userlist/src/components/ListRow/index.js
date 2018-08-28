@@ -12,7 +12,8 @@ class ListRow extends Component {
             <tr>
                 <td>
                     <Link to={{pathname: `/${this.props.data.id}`}}>
-                        <button type="button">
+                        <button type="button" 
+                            style={{color: "#00BFFF", border: "none", backgroundColor: "white"}}>
                         <i className="fas fa-pencil-alt"></i>{" Edit"}
                         </button>
                     </Link>
@@ -20,6 +21,7 @@ class ListRow extends Component {
                 <td>
                     <button type="button" 
                         onClick={() => this.props.deleteUser(this.props.data.id)}
+                        style={{border: "none", backgroundColor: "white"}}
                     >
                     <i className="far fa-times-circle"></i>{" Delete"}
                     </button>

@@ -17,7 +17,7 @@ class UserList extends Component {
             descWithSex: false,
             descWithAge: false,
             curPage: 1,
-            usersPerPage: 3,
+            usersPerPage: 5,
         };
     }
     
@@ -94,8 +94,8 @@ class UserList extends Component {
     }
     render() {
         return (
-            <div>
-                <h3>Users:</h3>
+            <div style={{lineHeight: "1", margin: "15px 25px"}}>
+                <h3>Users</h3>
                 <hr />
                 <div>
                     <label htmlFor="search">Search:</label>
@@ -108,9 +108,9 @@ class UserList extends Component {
                 <div>
                     <label htmlFor="upp">Users / Page:</label>
                     <select onChange={this.handleUsersPerPage} id="upp">
-                        <option>3</option>
                         <option>5</option>
                         <option>10</option>
+                        <option>20</option>
                     </select>
                 </div>
                 <div>
@@ -119,10 +119,10 @@ class UserList extends Component {
                             <tr>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Delete</th>
-                                <th scope="col" onClick={this.sortWithFN}>First Name</th>
-                                <th scope="col" onClick={this.sortWithLN}>Last Name</th>
-                                <th scope="col" onClick={this.sortWithSex}>Sex</th>
-                                <th scope="col" onClick={this.sortWithAge}>Age</th>
+                                <th scope="col" onClick={this.sortWithFN} style={{color: "#00BFFF"}}>First Name</th>
+                                <th scope="col" onClick={this.sortWithLN} style={{color: "#00BFFF"}}>Last Name</th>
+                                <th scope="col" onClick={this.sortWithSex} style={{color: "#00BFFF"}}>Sex</th>
+                                <th scope="col" onClick={this.sortWithAge} style={{color: "#00BFFF"}}>Age</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -155,7 +155,11 @@ class UserList extends Component {
                     />
                 </div>
                 <div>
-                    <button className="btn btn-primary" onClick={this.onCreateClick}><i className="fas fa-user-plus"></i>{" Create New User"}</button>
+                    <button className="btn btn-success" onClick={this.onCreateClick}
+                        // style={{backgroundColor: "green"}}
+                    >
+                        <i className="fas fa-user-plus"></i>{" Create New User"}
+                    </button>
                 </div>
             </div>
         );

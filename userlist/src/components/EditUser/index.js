@@ -112,8 +112,12 @@ class EditUser extends Component {
         this.props.history.push("/");
         }
     }
+    onDiscardClick = () => {
+        this.props.history.push("/");
+    }
     render() {
         return (
+            <div style={{width: "300px", lineHeight: "0.5", margin: "20px 50px"}}>
             <form onSubmit={this.handleSubmit}>
                 <h3>Edit User:</h3>
                 <div className="form-group">
@@ -170,8 +174,16 @@ class EditUser extends Component {
                         />
                     <PWMatch match={this.state.pwMatch} />
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={this.onAddClick}><i className="fas fa-download"></i>{" Save Changes"}</button>
+                <button type="submit" className="btn btn-success">
+                    <i className="fas fa-download"></i>{" Save Changes"}
+                </button>
+                <button type="button" className="btn float-right"
+                    onClick={this.onDiscardClick}
+                >
+                    {"Discard Changes"}
+                </button>
             </form>
+            </div>
         );
     }
 }

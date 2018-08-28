@@ -117,8 +117,12 @@ class CreateNewUser extends Component {
         this.props.history.push("/");
         }
     }
+    onCancelClick = () => {
+        this.props.history.push("/");
+    }
     render() {
         return (
+            <div style={{width: "300px", lineHeight: "0.5", margin: "20px 50px"}}>
             <form onSubmit={this.handleSubmit}>
                 <h3>Create New User:</h3>
                 <div className="form-group">
@@ -175,8 +179,16 @@ class CreateNewUser extends Component {
                         />
                     <PWMatch match={this.state.pwMatch} />
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={this.onAddClick}><i className="fas fa-plus"></i>{" Add User"}</button>
+                <button type="submit" className="btn btn-success" onClick={this.onAddClick}>
+                    <i className="fas fa-plus"></i>{" Add User"}
+                </button>
+                <button type="button" className="btn float-right"
+                    onClick={this.onCancelClick}
+                >
+                    {"Cancel"}
+                </button>
             </form>
+            </div>
         );
     }
 }
