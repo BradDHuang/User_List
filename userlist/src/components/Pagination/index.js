@@ -3,22 +3,30 @@ import React, {Component} from "react";
 
 const GoPrev = (props) => {
     return props.page === 1 ? 
-        (<li><a>Prev</a></li>) : 
-        (<li onClick={() => props.changePage(props.page - 1)}><a>Prev</a></li>);
+        (<li className="page-item disabled">
+            <a className="page-link"><i className="fas fa-chevron-left"></i></a>
+        </li>) : 
+        (<li className="page-item" onClick={() => props.changePage(props.page - 1)}>
+            <a className="page-link"><i className="fas fa-chevron-left"></i></a>
+        </li>);
 };
 const GoNext = (props) => {
     return props.page === props.lastPageNum ? 
-        (<li><a>Next</a></li>) : 
-        (<li onClick={() => props.changePage(props.page + 1)}><a>Next</a></li>);
+        (<li className="page-item disabled">
+            <a className="page-link"><i className="fas fa-chevron-right"></i></a>
+        </li>) : 
+        (<li className="page-item" onClick={() => props.changePage(props.page + 1)}>
+            <a className="page-link"><i className="fas fa-chevron-right"></i></a>
+        </li>);
 };
 const CurPage = (props) => {
     return (
         props.cur ?
-        (<li onClick={() => props.changePage(props.pageNum)}>
-            <a>{props.pageNum}</a>
+        (<li className="page-item active" onClick={() => props.changePage(props.pageNum)}>
+            <a className="page-link">{props.pageNum}</a>
         </li>) :
-        (<li onClick={() => props.changePage(props.pageNum)}>
-            <a>{props.pageNum}</a>
+        (<li className="page-item" onClick={() => props.changePage(props.pageNum)}>
+            <a className="page-link">{props.pageNum}</a>
         </li>)
     );
 };
@@ -38,14 +46,14 @@ class Pagination extends Component {
     }
     render() {
         return (
-            <div>
-                {this.props.data.nums}
+            <nav aria-label="...">
+                <ul className="pagination">
                 <GoPrev 
                     page={this.props.data.curPage}
                     changePage={this.props.changePage}
                 />
                 {this.state.allPages.map((p, index) => {
-                    return (index === this.props.data.curPage) ?
+                    return ((index + 1) === this.props.data.curPage) ?
                     (<CurPage 
                         key={index} pageNum={p} cur={true} changePage={this.props.changePage}
                     />) :
@@ -58,7 +66,8 @@ class Pagination extends Component {
                     lastPageNum={this.state.numOfPages}
                     changePage={this.props.changePage}
                 />
-            </div>
+                </ul>
+            </nav>
             
         );
     }

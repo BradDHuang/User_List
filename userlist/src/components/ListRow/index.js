@@ -13,7 +13,8 @@ class ListRow extends Component {
                 <td>
                     <Link to={{pathname: `/${this.props.data.id}`}}>
                         <button type="button">
-                        Edit
+                        <i className="fas fa-pencil-alt"></i>
+                        {" Edit"}
                         </button>
                     </Link>
                 </td>
@@ -21,7 +22,8 @@ class ListRow extends Component {
                     <button type="button" 
                         onClick={() => this.props.deleteUser(this.props.data.id)}
                     >
-                    Delete
+                    <i className="far fa-times-circle"></i>
+                    {" Delete"}
                     </button>
                 </td>
                 <td>{this.props.data.first_name}</td>
