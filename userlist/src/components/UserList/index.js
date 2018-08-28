@@ -38,6 +38,14 @@ class UserList extends Component {
             user.age.search(new RegExp(this.state.search)) !== -1
         );
     }
+    sortWithFN = () => {
+        console.log("get all users for sorting");
+        this.props.users.sort((a, b) => a.first_name.localeCompare(b.first_name));
+        console.log(this.props.users);
+        let sortedUsers = this.props.users;
+        // console.log(sortedUsers);
+        this.setState({ users: sortedUsers });
+    }
     render() {
         return (
             <div>
@@ -56,14 +64,13 @@ class UserList extends Component {
                             <tr>
                                 <th>Edit</th>
                                 <th>Delete</th>
-                                <th>First-Name</th>
+                                <th onClick={this.sortWithFN}>First-Name</th>
                                 <th>Last-Name</th>
                                 <th>Sex</th>
                                 <th>Age</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
                             {this.props.users.map((user, index) => {
                                 if (this.state.search === "") {
                                     return <WithRouterListRow key={index} data={user} 
