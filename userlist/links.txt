@@ -8,7 +8,10 @@ https://github.com/axios/axios/issues/1195
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/search
 // str.search(regexp)
 
-
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
+// The localeCompare() method returns a number 
+// indicating whether a reference string comes before or after or is the same 
+// as the given string in sort order.
 
 
 
