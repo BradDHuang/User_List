@@ -106,12 +106,8 @@ class UserList extends Component {
                 </div>
                 <hr />
                 <div>
-                    <label htmlFor="upp">Users / Page:</label>
-                    <select onChange={this.handleUsersPerPage} id="upp">
-                        <option>5</option>
-                        <option>10</option>
-                        <option>20</option>
-                    </select>
+                    <label htmlFor="upp">Users / Page: 5</label>
+                    
                 </div>
                 <div>
                     <table className="table">
