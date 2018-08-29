@@ -1,0 +1,17 @@
+
+To do:
+
+Do not use axios calls in components.
+
+For delete, should get updated res from server/DB.
+
+
+
+
+
+
+
+
+
+
+
